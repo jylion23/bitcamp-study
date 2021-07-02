@@ -9,7 +9,23 @@
 plugins {
     // id 'java' // 자바 애플리케이션 빌드 관련 작업들을 추가
     id 'application'
+    id 'eclipse' //이클립스 IDE 관련 작업
+    // eclipseProject : .project 파일 생성
+    // eclipseClasspath :.classpath 파일 생성
+    // eclipse : .project 파일 + .classpath 파일 + .setting/ 폴더 생성
+    // cleanEclipseProject : .project 파일 제거
+    // cleanEclipseClasspath : .classpath 파일 제거
+    // cleanEclipse : cleanEclipseProject + cleanEclipseClasspath 
+    // 
 }
+
+// 이클립스 프로젝트 이름 설정하기
+ eclipse {
+    project{
+        name= "study-project"
+    }
+}
+
 
 //  프로젝트에서 외부의 라이브러리를 사용한다면
 // 그 라이브러리 파일(.jar)을 다운 받을 서버 정보 설정
@@ -30,6 +46,8 @@ dependencies {
     implementation 'com.google.guava:guava:30.1-jre'
 }
 
+// 'application' 플러그인에서 run을 실행할 때 사용할
+// 클래스 이름을 지정
 application {
     mainClass = 'com.eomcs.pms.App'
 }
