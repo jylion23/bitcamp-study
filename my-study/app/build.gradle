@@ -9,8 +9,16 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'eclipse'
 }
 
+
+// 이클립스 프로젝트 이름 설정하기
+ eclipse {
+    project{
+        name= "my-study"
+    }
+}
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
