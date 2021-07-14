@@ -3,19 +3,32 @@ package com.eomcs.pms;
 import java.sql.Date;
 import java.util.Scanner;
 
-//7) 사용자로부터 명령어를 입력 받는 코드를 별도의 메서드로 분리한다.
-//   => prompt() 메서드를 정의하고 관련된 코드를 가져오기
-//8) 명령어 뿐만 아니라 사용자로부터 입력을 받는 기능을 모두 prompt()를 사용하여 처리한다.
-//   => prompt()를 호출할 때 사용자에게 출력할 프롬프트 메시지를 아규먼트로 넘긴다.
-//   => prompt()는 호출할 때 넘어온 프롬프트 메시지 값을 파라미터로 받는다.
-//9) prompt() 가 작업한 결과를 클래스 변수에 담지 말고 호출자에게 리턴한다.
-//   => prompt()를 실행한 후 사용자가 입력한 문자열을 리턴한다.
-//10) prompt()의 기능을 더 세분화한다.
-//   => promptString() : 사용자로부터 문자열을 입력 받아 리턴한다.
-//   => promptInt() : 사용자로부터 숫자를 입력 받아 리턴한다.
-//   => promptDate() : 사용자로부터 날짜를 입력 받아 리턴한다.
+
+//1) 회원 데이터를 입력 받는 코드를 별도의 메서드로 분리한다.
+// => addMember() 메서드 정의 및 회원 등록 코드를 가져오기
+// => main()과 addMember()가 서로 공유하는 변수는 클래스 변수로 만든다.
+//2) 입력된 회원 데이터의 목록을 출력하는 코드를 별도의 메서드로 분리한다.
+// => listMembers() 메서드 정의 및 관련된 코드를 가져오기
+//3) 프로젝트 데이터를 입력 받는 코드를 별도의 메서드로 분리한다.
+// => addProject() 메서드 정의 및 관련 코드를 가져오기
+// => main()과 addProject()가 서로 공유하는 변수는 클래스 변수로 만든다.
+//4) 입력된 프로젝트 데이터의 목록을 출력하는 코드를 별도의 메서드로 분리한다.
+// => listProjects() 메서드 정의 및 관련된 코드를 가져오기
+//5) 작업 데이터를 입력 받는 코드를 별도의 메서드로 분리한다.
+// => addTask() 메서드 정의 및 관련 코드를 가져오기
+// => main()과 addTask()가 서로 공유하는 변수는 클래스 변수로 만든다.
+//6) 입력된 작업 데이터의 목록을 출력하는 코드를 별도의 메서드로 분리한다.
+// => listTasks() 메서드 정의 및 관련된 코드를 가져오기
+//7) 사용자로부터 값을 입력받는 코드를 별도의 메서드로 분리
+//  => prompt() 메서드를 정의하고 관련된 코드를 가져오기
+//8) 명령어뿐만 아니라 사용자로부터 입력을 받는 기능을 prompt()로부터 처리한다.
+//9) prompt()가 작업한 결과를 클래스 변수에 담지말고 호출자에게 리턴
+//10) prompt()의 기능 세분화
 //11) promtString(), promptInt(), promptDate() 메서드의 코드를 정리한다.
-public class App {
+
+
+public class App_02 {
+  //
 
   static Scanner keyboardScan = new Scanner(System.in);
 
@@ -41,7 +54,7 @@ public class App {
   static String[] pMembers = new String[PROJECT_LENGTH];
   static int pSize = 0;
 
-  // 작업 정보
+  //작업 정보
   static final int TASK_LENGTH = 100;
   static int[] tNo = new int[TASK_LENGTH];
   static String[] tContent = new String[TASK_LENGTH];
@@ -50,21 +63,23 @@ public class App {
   static int[] tStatus = new int[TASK_LENGTH];
   static int tSize = 0;
 
+  // 사용자가 입력한 값을 보관하는 변수
 
   public static void main(String[] args) {
 
-
     while (true) {
       String input = promptString("명령> ");
+
 
       if (input.equals("exit") || input.equals("quit")) {
         System.out.println("안녕!");
         break;
       } else if (input.equals("/member/add")) {
+        //     메서드로 분리한 코드를 실행하기 
         addMember();
 
       } else if (input.equals("/member/list")) {
-        listMembers();
+        listMember();
 
       }  else if (input.equals("/project/add")) {
         addProject();
@@ -73,22 +88,25 @@ public class App {
         listProjects();
 
       }  else if (input.equals("/task/add")) {
-        addTask();
+        taskAdd();
 
-      }  else if (input.equals("/task/list")) {
-        listTasks();
-
-      } else {
+      }else if (input.equals("/task/list")) {
+        taskList();
+      }else {
         System.out.println("실행할 수 없는 명령입니다.");
       }
       System.out.println();
     }
-
     keyboardScan.close();
   }
 
+
+
   static void addMember() {
     System.out.println("[회원 등록]");
+
+    //    prompt("번호? ");
+    //    no[size] = Integer.parseInt(input);
 
     no[size] = promptInt("번호? ");
     name[size] = promptString("이름? ");
@@ -99,9 +117,10 @@ public class App {
     registeredDate[size] = new Date(System.currentTimeMillis());
 
     size++;
+
   }
 
-  static void listMembers() {
+  static void listMember() {
     System.out.println("[회원 목록]");
     for (int i = 0; i < size; i++) {
       // 번호, 이름, 이메일, 전화, 가입일
@@ -109,6 +128,7 @@ public class App {
           no[i], name[i], email[i], tel[i], registeredDate[i]);
     }
   }
+
 
   static void addProject() {
     System.out.println("[프로젝트 등록]");
@@ -118,8 +138,8 @@ public class App {
     pContent[pSize] = promptString("내용? ");
     pStartDate[pSize] = promptDate("시작일? ");
     pEndDate[pSize] = promptDate("종료일? ");
-    pOwner[pSize] =  promptString("만든이? ");
-    pMembers[pSize] =  promptString("팀원? ");
+    pOwner[pSize] = promptString("만든이? ");
+    pMembers[pSize] = promptString("팀원? ");
 
     pSize++;
   }
@@ -127,16 +147,16 @@ public class App {
   static void listProjects() {
     System.out.println("[프로젝트 목록]");
     for (int i = 0; i < pSize; i++) {
-      // 번호, 프로젝트명, 시작일, 종료일, 만든이
+      // 번호, 프로젝트명, 시작일, 종료일, 만든이 
       System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
           pNo[i], pTitle[i], pStartDate[i], pEndDate[i], pOwner[i]);
     }
   }
 
-  static void addTask() {
+  static void taskAdd() {
     System.out.println("[작업 등록]");
 
-    tNo[tSize] = promptInt("번호? ");
+    tNo[tSize] = promptInt("작업 번호? ");
     tContent[tSize] = promptString("내용? ");
     tDeadline[tSize] = promptDate("마감일? ");
 
@@ -150,8 +170,9 @@ public class App {
     tSize++;
   }
 
-  static void listTasks() {
+  static void taskList() {
     System.out.println("[작업 목록]");
+
 
     for (int i = 0; i < tSize; i++) {
       String stateLabel = null;
@@ -169,20 +190,28 @@ public class App {
       System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
           tNo[i], tContent[i], tDeadline[i], stateLabel, tOwner[i]);
     }
-  }   
-
-  static  String promptString(String title) {
-    System.out.print(title);
-    return keyboardScan.nextLine();
-
   }
 
-  static  int promptInt(String title) {
+  //  prompt();
+  /* 
+   *
+   *
+   *
+   *
+   *
+   */
+
+  //  사용자로부터 문자열을 입력받는 기능 수행
+
+  static String promptString(String title) {
+    System.out.print(title); 
+    return keyboardScan.nextLine();
+  }
+  static int promptInt(String title) {
     return Integer.parseInt(promptString(title));
   }
-
-  static  Date promptDate(String title) {
+  static Date promptDate(String title) {
     return Date.valueOf(promptString(title));
   }
-}
 
+}
