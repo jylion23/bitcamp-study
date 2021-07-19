@@ -7,8 +7,8 @@ public class Exam0421 {
 
   public static void main(String[] args) throws Exception {
 
-    int[] moneys = new int[] {100, 200, 300};
-    float[] totals = new float[moneys.length];
+    int[] moneys = new int[] {100, 200, 300}; /*인트타입 배열 moneys에 인트타입 배열 인스턴스 주소를 대입*/
+    float[] totals = new float[moneys.length];/*플롯타입 배열 totals에 플롯타입 moneys. 인스턴스 주소를 대입*/
 
     // 호출하는 쪽에서 결과를 담을 배열을 주는 경우
     compute(moneys, totals, 0.0089f);

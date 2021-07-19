@@ -1,0 +1,26 @@
+package com.eomcs.algorithm.quiz;
+
+public class Test {
+
+  public static int divisorsPairs(int[] sequence) {
+    int result = 0;
+
+    for (int i = 0; i < sequence.length - 1; i++) {
+      for (int j = i + 1; j < sequence.length; j++) {
+        System.out.printf("%d <--> %d\n", sequence[i], sequence[j]);
+        if (sequence[i] % sequence[j] == 0 || sequence[j] % sequence[i] == 0) {
+          result++;
+        }
+      }
+    }
+
+    return result;
+  }
+
+  public static void main(String[] args) {
+    int[] values = {8, 4, 2, 3, 6, 10, 5};
+    System.out.println(divisorsPairs(values));
+
+  }
+}
+

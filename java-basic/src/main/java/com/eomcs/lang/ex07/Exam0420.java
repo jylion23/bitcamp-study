@@ -5,15 +5,16 @@ package com.eomcs.lang.ex07;
 public class Exam0420 {
 
   static int[] getArray() {
+    /*int 타입 배열 arr = 연속된 int타입 메모리 배열 인스턴스 생성후 그 주소를 arr에 대입*/
     int[] arr = new int[] {100, 200, 300};
     return arr;
   }
 
   public static void main(String[] args) {
-    int[] arr;
-    arr = getArray();
+    int[] arr = getArray();
     System.out.println(arr[1]); // 200
   }
+
 }
 
 // 1) main() 호출

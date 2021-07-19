@@ -19,8 +19,7 @@ public class Exam0430 {
   }
 
   public static void main(String[] args) {
-    MyObject ref;
-    ref = getMyObject();
+    MyObject ref = getMyObject();
     System.out.println(ref.a);
     System.out.println(ref.b);
   }
