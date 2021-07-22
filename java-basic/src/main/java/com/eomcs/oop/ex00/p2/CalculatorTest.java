@@ -13,6 +13,7 @@ public class CalculatorTest {
     System.out.println(Calculator.result);
 
     Calculator.result = 0;
+
     Calculator.plus(3);
     Calculator.multiple(2);
     Calculator.minus(1);

@@ -12,9 +12,10 @@ public class CalculatorTest {
     r1 = Calculator.plus(r1, 3);
     r1 = Calculator.plus(r1, 4);
     r1 = Calculator.minus(r1, 7);
-    r1 = Calculator.multiple(r1, 3);    r2 = Calculator.plus(r2, 3);
-    
+    r1 = Calculator.multiple(r1, 3);    
 
+
+    r2 = Calculator.plus(r2, 3);
     r2 = Calculator.multiple(r2, 2);
     r2 = Calculator.minus(r2, 1);
 

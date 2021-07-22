@@ -100,6 +100,41 @@ public class BoardHandler {
     System.out.println("게시글을 변경하였습니다.");
   }
 
+  public void delete() {
+    System.out.println("[게시글 삭제]");
+    int no = Prompt.inputInt("번호? ");
+
+    int boardIndex = -1;
+
+    //  boards 인스턴스가 들어있는 배열에서 게시글 번호와 일치하는 
+    // boards 인스턴스를 찾는다.
+    for (int i = 0; i < this.size; i++) {
+      if (boards[i].no == no) {
+        boardIndex = i;
+        break;
+      }
+    }
+
+    if (boardIndex == -1 ) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
+
+    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("게시글 삭제를 취소하였습니다.");
+      return;
+    }
+    for (int i = boardIndex + 1; i < this.size; i++) {
+      boards[i - 1] = boards[i];
+    }
+    this.boards[--size] = null;
+
+    System.out.println("게시글을 삭제하였습니다.");
+  }
+
+
+
 }
 
 

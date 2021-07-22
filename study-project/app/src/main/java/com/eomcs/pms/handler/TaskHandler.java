@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import java.sql.Date;
 import com.eomcs.pms.domain.Task;
 import com.eomcs.util.Prompt;
 
@@ -65,6 +66,103 @@ public class TaskHandler {
           stateLabel, 
           this.tasks[i].owner);
     }
+  }
+
+  public void detail() {
+    System.out.println("[작업 상세보기]");
+    int no = Prompt.inputInt("번호? ");
+
+    Task task = null;
+
+    for (int i = 0; i < size; i++) {
+      if(tasks[i].no == no) {
+        task = tasks[i];
+        break;
+      }
+    }
+    if (task == null) {
+      System.out.println("해당 작업 번호를 찾을 수 없습니다.");
+      return;
+    }
+    System.out.printf("번호: %d\n", task.no);
+    System.out.printf("내용: %s\n", task.content);
+    System.out.printf("마감일: %s\n", task.deadline);
+    System.out.printf("담당자: %s\n", task.owner);
+    System.out.printf("상태: %d\n", task.status);
+  }
+
+  public void update() {
+    System.out.println("[작업 변경]");
+    int no = Prompt.inputInt("번호? ");
+
+    Task task = null;
+
+
+    for (int i = 0; i < size; i++) {
+      if(tasks[i].no == no) {
+        task = tasks[i];
+        break;
+      }
+    }
+
+    if (task == null) {
+      System.out.println("해당 번호의 작업이 없습니다.");
+      return;
+    }
+
+    String content = Prompt.inputString(String.format("내용(%s)? ", task.content));
+    Date deadline = Prompt.inputDate(String.format("마감일(%s)? ", task.deadline));
+    String owner = Prompt.inputString(String.format("담당자(%s)? ", task.owner));
+    int status = Prompt.inputInt(String.format("상태(%s)? ", task.status));
+
+    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+
+    if (input.equalsIgnoreCase("n") || input.length() == 0  ) {
+      System.out.println("작업 변경을 취소하였습니다.");
+      return;
+    }
+
+    task.content = content;
+    task.deadline = deadline;
+    task.owner = owner;
+    task.status = status;
+    System.out.println("작업을 변경하였습니다.");
+
+  }
+
+  public void delete() {  
+
+    System.out.println("[작업 삭제]");
+    int no = Prompt.inputInt("번호? ");
+
+    int taskIndex = -1;
+
+
+    for (int i = 0; i < size; i++) {
+      if(tasks[i].no == no) {
+        taskIndex = i; 
+        break;
+      }
+    }
+
+    if (taskIndex == -1 ) {
+      System.out.println("해당 번호의 작업이 없습니다.");
+      return;
+    }
+
+
+    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0  ) {
+      System.out.println("작업 변경을 취소하였습니다.");
+      return;
+    }
+
+    for (int i = taskIndex + 1; i < size; i++) {
+      tasks[i -1] = tasks[i];
+    }
+    tasks[--size] = null;
+
+    System.out.println("작업을 삭제하였습니다."); 
   }
 
 }

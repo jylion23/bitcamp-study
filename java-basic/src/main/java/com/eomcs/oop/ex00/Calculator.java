@@ -4,16 +4,16 @@ public class Calculator {
 
   int result;
 
-  static void plus(Calculator that, int value) {
-    that.result += value;
+  void plus(int value) {
+    result += value;
   }
 
-  static void minus(Calculator that, int value) {
-    that.result -= value;
+  void minus(int value) {
+    result -= value;
   }
 
-  static void multiple(Calculator that, int value) {
-    that.result *= value;
+  void multiple(int value) {
+    result *= value;
   }
+
 }
-
