@@ -158,7 +158,7 @@ public class TaskHandler {
     }
 
     for (int i = taskIndex + 1; i < size; i++) {
-      tasks[i -1] = tasks[i];
+      tasks[i - 1] = tasks[i];
     }
     tasks[--size] = null;
 
