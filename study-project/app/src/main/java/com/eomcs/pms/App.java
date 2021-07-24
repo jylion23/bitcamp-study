@@ -42,6 +42,15 @@ public class App {
       }  else if (input.equals("/project/list")) {
         projectHandler.list();
 
+      }  else if (input.equals("/project/detail")) {
+        projectHandler.detail();
+
+      }  else if (input.equals("/project/update")) {
+        projectHandler.update(memberHandler);
+
+      }  else if (input.equals("/project/delete")) {
+        projectHandler.delete();
+
       }  else if (input.equals("/task/add")) {
         taskHandler.add(memberHandler);
 
@@ -52,7 +61,7 @@ public class App {
         taskHandler.detail();
 
       }  else if (input.equals("/task/update")) {
-        taskHandler.update();
+        taskHandler.update(memberHandler);
 
       }  else if (input.equals("/task/delete")) {
         taskHandler.delete();

@@ -47,14 +47,7 @@ public class BoardHandler {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = null;
-
-    for (int i = 0; i < this.size; i++) {
-      if (boards[i].no == no) {
-        board = boards[i];
-        break;
-      }
-    }
+    Board board = findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -72,14 +65,7 @@ public class BoardHandler {
     System.out.println("[게시글 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = null;
-
-    for (int i = 0; i < this.size; i++) {
-      if (boards[i].no == no) {
-        board = boards[i];
-        break;
-      }
-    }
+    Board board = findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -104,18 +90,13 @@ public class BoardHandler {
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    int boardIndex = -1;
+    int index = indexOf(no);
 
     //  boards 인스턴스가 들어있는 배열에서 게시글 번호와 일치하는 
     // boards 인스턴스를 찾는다.
-    for (int i = 0; i < this.size; i++) {
-      if (boards[i].no == no) {
-        boardIndex = i;
-        break;
-      }
-    }
 
-    if (boardIndex == -1 ) {
+
+    if (index  == -1 ) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
@@ -125,7 +106,7 @@ public class BoardHandler {
       System.out.println("게시글 삭제를 취소하였습니다.");
       return;
     }
-    for (int i = boardIndex + 1; i < this.size; i++) {
+    for (int i = index + 1; i < size; i++) {
       boards[i - 1] = boards[i];
     }
     this.boards[--size] = null;
@@ -133,7 +114,24 @@ public class BoardHandler {
     System.out.println("게시글을 삭제하였습니다.");
   }
 
+  private Board findByNo(int no) {
+    for (int i = 0; i < this.size; i++) {
+      if (boards[i].no == no) {
+        return boards[i];
+      }
+    }
+    return null;
+  }
 
+  private int indexOf(int no) {
+    for (int i = 0; i < size; i++) {
+      if (boards[i].no == no) {
+        return i;
+      }
+    }
+    return -1;
+
+  }
 
 }
 

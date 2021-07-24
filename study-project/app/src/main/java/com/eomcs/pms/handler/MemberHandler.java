@@ -43,14 +43,8 @@ public class MemberHandler {
     System.out.println("[회원 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Member member = null;
+    Member member = findByNo(no);
 
-    for (int i = 0; i < size; i++) {
-      if (members[i].no == no) {
-        member = members[i];
-        break;
-      }
-    }
 
     if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -69,20 +63,18 @@ public class MemberHandler {
     System.out.println("[회원 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Member member = null;
+    Member member = findByNo(no);
 
-    for (int i = 0; i < size; i++) {
-      if (members[i].no == no) {
-        member = members[i];
-        break;
-      }
-    }
 
     if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
       return;
     }
+
+    String name = Prompt.inputString("이름(" + member.name  + ")? ");
     String email = Prompt.inputString(String.format("이메일(%s)? ", member.email));
+    String password = Prompt.inputString("암호? ");
+    String photo = Prompt.inputString("사진(" + member.photo + ")? ");
     String tel = Prompt.inputString(String.format("전화(%s)? ", member.tel));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
@@ -90,8 +82,12 @@ public class MemberHandler {
       System.out.println("회원 변경을 취소하였습니다.");
       return;
     }
+    member.name = name;
     member.email = email;
+    member.password = password;
+    member.photo = photo;
     member.tel = tel;
+
     System.out.println("회원 변경하였습니다.");
   }
 
@@ -99,14 +95,8 @@ public class MemberHandler {
     System.out.println("[회원 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    int memberIndex = -1;
 
-    for (int i = 0; i < size; i++) {
-      if(members[i].no == no) {
-        memberIndex = i;
-        break;
-      }
-    }
+    int memberIndex = indexOf(no);
 
     if (memberIndex == -1) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -136,11 +126,23 @@ public class MemberHandler {
     return false;
   }
 
+
+  private Member findByNo(int no) {
+    for (int i = 0; i < size; i++) {
+      if (members[i].no == no) {
+        return  members[i];
+      }
+    }
+    return null;
+  }
+
+  private int indexOf(int no) {
+    for (int i = 0; i < size; i++) {
+      if(members[i].no == no) {
+        return i;
+      }
+    } 
+    return -1;
+  }
+
 }
-
-
-
-
-
-
-
