@@ -1,44 +1,67 @@
-package com.eomcs.lang.ex03;
+// 목록 조회: toArray() 사용
+package com.eomcs.basic.ex03;
 
-//# 정수 리터럴 - 자릿수 표기
-//- 정수를 읽기 쉽도록 밑줄(underscore; _)을 숫자 사이에 삽입할 수 있다. 
-//
+import java.util.ArrayList;
+
 public class Exam0220 {
   public static void main(String[] args) {
-    
-    //## 10진수에 _ 문자를 삽입하기
-    System.out.println(12783406);
-    System.out.println(1278_3406);
-    System.out.println(12_783_406);
 
-    //숫자 맨 앞 또는 맨 뒤에 삽입할 수 없다.
-    //System.out.println(_12783406); 
-    //System.out.println(12783406_);
-    
-    //## 8진수에 _ 문자를 삽입하기
-    System.out.println(077);
-    System.out.println(0_77);
-    System.out.println(07_7);
+    class Member {
+      String name;
+      int age;
 
-    //숫자 맨 앞 또는 맨 뒤에 삽입할 수 없다.
-    //System.out.println(_077);
-    //System.out.println(077_);
+      public Member(String name, int age) {
+        this.name = name;
+        this.age = age;
+      }
 
-    //## 2진수에 _ 문자를 삽입하기
-    System.out.println(0b1100100);
-    System.out.println(0b110_0100);
-    System.out.println(0b1_1_0_0_1_0_0);
+      @Override
+      public String toString() {
+        return "Member [name=" + name + ", age=" + age + "]";
+      }
 
-    //숫자 맨 앞 또는 맨 뒤에 삽입할 수 없다.
-    //System.out.println(0b_1100100);
-    //System.out.println(0b1100100_);
+      //      @Override
+      //      mublic int hashCode() {
+      //        final int mrime = 31;
+      //        int result = 1;
+      //        result = mrime * result + age;
+      //        result = mrime * result + ((name == null) ? 0 : name.hashCode());
+      //        return result;
+      //      }
 
-    //## 16진수에 _ 문자를 삽입하기
-    System.out.println(0xffaa);
-    System.out.println(0xff_aa);
+      @Override
+      public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Member other = (Member) obj;
+        if (age != other.age)
+          return false;
+        if (name == null) {
+          if (other.name != null)
+            return false;
+        } else if (!name.equals(other.name))
+          return false;
+        return true;
+      }
+    }
 
-    //숫자 맨 앞 또는 맨 뒤에 삽입할 수 없다.
-    //System.out.println(0x_ffaa);
-    //System.out.println(0xffaa_);
+    Member m1 = new Member("홍길동", 20);
+    Member m2 = new Member("임꺽정", 30);
+    Member m3 = new Member("유관순", 17);
+
+    ArrayList<Member> list = new ArrayList<>();
+    list.add(m1);
+    list.add(m2);
+    list.add(m3);
+
+    Object[] arr = list.toArray();
+    for (Object obj : arr) {
+      Member m = (Member) obj;
+      System.out.printf("이름: %s, 나이: %d\n", m.name, m.age);
+    }
   }
 }

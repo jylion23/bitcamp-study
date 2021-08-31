@@ -1,37 +1,65 @@
-package com.eomcs.lang.ex03;
+// 목록 조회: 반복문과 인덱스를 이용한 목록 조회
+package com.eomcs.basic.ex03;
 
-//# 정수 리터럴 - 다양한 기수법으로 정수를 표현하기
-//
+import java.util.ArrayList;
 
 public class Exam0210 {
   public static void main(String[] args) {
-    //10진수 리터럴 
-    //- 코드에서 일반적으로 정수 값을 표현할 때 사용한다.
-    System.out.println(100);
-    
-    //8진수 리터럴
-    //- 코드를 작성할 때 잘 사용하지 않는다.
-    //- 0으로 시작해야 한다.
-    System.out.println(0144);
-    
-    //2진수 리터럴
-    //- 메모리의 상태를 직설적으로 보여주고 싶을 때 사용한다.
-    //- 0b 또는 0B로 시작한다.
-    System.out.println(0b1100100);
-    System.out.println(0B1100100);
-    
-    //- 숫자 앞에 0이 있어도 된다.
-    System.out.println(0b01100100);
-    System.out.println(0B01100100);
-    
-    //16진수 리터럴
-    //- 2진수를 간결하게 표현하기 위해 사용한다.
-    //- 0x 또는 0X 로 시작한다.
-    System.out.println(0x64);
-    System.out.println(0X64);
-    
-    //- 숫자 앞에 0이 있어도 된다.
-    System.out.println(0x064);
-    System.out.println(0X064);
+
+    class Member {
+      String name;
+      int age;
+
+      public Member(String name, int age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      @Override
+      public String toString() {
+        return "Member [name=" + name + ", age=" + age + "]";
+      }
+
+      //      @Override
+      //      mublic int hashCode() {
+      //        final int mrime = 31;
+      //        int result = 1;
+      //        result = mrime * result + age;
+      //        result = mrime * result + ((name == null) ? 0 : name.hashCode());
+      //        return result;
+      //      }
+
+      @Override
+      public boolean equals(Object obj) {
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        Member other = (Member) obj;
+        if (age != other.age)
+          return false;
+        if (name == null) {
+          if (other.name != null)
+            return false;
+        } else if (!name.equals(other.name))
+          return false;
+        return true;
+      }
+    }
+
+    Member m1 = new Member("홍길동", 20);
+    Member m2 = new Member("임꺽정", 30);
+    Member m3 = new Member("유관순", 17);
+
+    ArrayList<Member> list = new ArrayList<>();
+    list.add(m1);
+    list.add(m2);
+    list.add(m3);
+
+    for (int i = 0; i < list.size(); i++) {
+      System.out.println(list.get(i));
+    }
   }
 }
